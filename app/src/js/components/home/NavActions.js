@@ -8,7 +8,8 @@ export function NavActons($parent) {
   }
 
   const render = () => {
-    if (state.loggedIn) {
+    console.log(state)
+    if (state.loggedIn === 'true') {
       $parent.innerHTML = loggedInTemplate;
     } else {
       $parent.innerHTML = loggedOutTemplate;
