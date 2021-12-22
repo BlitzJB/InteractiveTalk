@@ -1,13 +1,12 @@
-export function Component(parentQuerySelector) {
+export function Component($parent) {
   const template = '<h1>Hello World</h1>';
-  const parent = document.querySelector(parentQuerySelector);
   
   const init = () => {
     render();
   }
 
   const render = () => {
-    parent.innerHTML = template;
+    $parent.innerHTML = template;
   }
 
   return {init, render};

@@ -1,6 +1,6 @@
-import {Component} from './components/Component.js';
+import {App} from './components/App.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new Component('#app');
+  const app = new App();
   app.init();
 })
