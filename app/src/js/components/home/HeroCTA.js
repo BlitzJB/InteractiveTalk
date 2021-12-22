@@ -5,7 +5,7 @@ export function HeroCTA($parent) {
     state.link = '/dashboard'
   } else {
     state.text = 'Get Started'
-    state.link = '/login'
+    state.link = '/signup'
   };
   let template = `<a href="${state.link}"><button class="btn btn-primary btn-lg px-4 gap-3" type="button"><strong>${state.text}</strong></button></a>`;
 

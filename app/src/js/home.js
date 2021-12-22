@@ -1,5 +1,5 @@
-import { NavActons } from "./components/NavActions.js";
-import { HeroCTA } from "./components/HeroCTA.js";
+import { NavActons } from "./components/home/NavActions.js";
+import { HeroCTA } from "./components/home/HeroCTA.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   const navActions_parent = document.querySelector('#nav_actions') 
