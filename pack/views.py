@@ -1,4 +1,5 @@
-from flask import render_template, url_for, redirect, request,session
+import json
+from flask import render_template, url_for, redirect, request, jsonify
 from flask.helpers import make_response
 
 from .secret_config import config
@@ -28,6 +29,8 @@ def oauth2callback():
   User().create_user(info)
   resp = make_response(render_template('redirect.html', action = 'Logged In', extras = f'as {info["name"]}', url = url_for('index')))
   resp.set_cookie(config.SECURITY_TOKEN_NAME, info['sub'])
+  resp.set_cookie(config.PROFILE_PICTURE_TOKEN_NAME, info['picture'])
+  resp.set_cookie(config.NAME_TOKEN_NAME, info['given_name'])
   return resp
 
 @app.route('/login')
@@ -39,9 +42,15 @@ def login():
 def logout():
   resp = redirect(url_for('index'))
   resp.set_cookie(config.SECURITY_TOKEN_NAME, '', expires=0)
+  resp.set_cookie(config.PROFILE_PICTURE_TOKEN_NAME, '', expires=0)
+  resp.set_cookie(config.NAME_TOKEN_NAME, '', expires=0)
   return resp
 
 @app.route('/profile')
 @googlelogin.protected
 def profile(current_user):
   return render_template('profile.html', user=current_user)
+
+@app.route('/get_user')
+def get_user():
+  return jsonify(User().find_user(request.args.get(config.SECURITY_TOKEN_NAME)))

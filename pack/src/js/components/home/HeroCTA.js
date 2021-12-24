@@ -1,6 +1,12 @@
+import { getCookie } from "../../helpers.js";
+
 export function HeroCTA($parent) {
-  let state = {loggedIn: localStorage.getItem('loggedIn')};
-  if (state.loggedIn === 'true') {
+  const cookieFieldName = 'google_id';
+  const cookie = getCookie(cookieFieldName);
+  
+  let state = {loggedIn: cookie ? true : false};
+  
+  if (state.loggedIn === true) {
     state.text = 'Open Dashboard'
     state.link = '/dashboard'
   } else {
